@@ -7,19 +7,26 @@ import { graphCMSImageLoader } from '../util'
 
 const PostCard = ({ post }) => {
   return (
-    <div className="mb-8 rounded-lg bg-white p-0 pb-12 shadow-lg lg:p-8">
-      <div className="relative mb-6 overflow-hidden pb-80 shadow-md">
-        <img
-          src={post.featuredImage.url}
+    <div className="mb-8 rounded-lg bg-emerald-50 p-4 pb-12 shadow-lg sm:p-4 md:p-4 lg:p-8">
+      <div className="relative mb-6 overflow-hidden shadow-md">
+        <Image
+          unoptimized
+          loader={graphCMSImageLoader}
           alt={post.title}
-          className="absolute h-80 w-full rounded-t-lg object-cover  object-top shadow-lg lg:rounded-lg"
+          height={1200}
+          width={1500}
+          layout="intrinsic"
+          className="absolute h-80 w-full rounded-lg rounded-t-lg object-cover object-top shadow-lg"
+          src={post.featuredImage.url}
         />
       </div>
-      <h1 className="mb-8 cursor-pointer text-center text-3xl font-semibold transition duration-700 hover:text-pink-600">
-        <Link href={`/post/${post.slug}`}>{post.title}</Link>
-      </h1>
-      <div className="mb-8 block w-full items-center justify-center text-center lg:flex">
-        <div className="mb-4 mr-8 flex w-full items-center items-center justify-center lg:mb-0 lg:w-auto">
+      <Link href={`/post/${post.slug}`}>
+        <h1 className="mb-8 cursor-pointer text-center text-xl font-semibold text-neutral-700 transition duration-700 hover:text-emerald-500 md:text-2xl lg:text-3xl">
+          {post.title}
+        </h1>
+      </Link>
+      <div className="mb-8 block flex w-full items-center justify-center text-center">
+        <div className="mb-4 mr-8 mb-0 flex w-full w-auto items-center items-center justify-center">
           <Image
             unoptimized
             loader={graphCMSImageLoader}
@@ -29,14 +36,14 @@ const PostCard = ({ post }) => {
             className="rounded-full align-middle"
             src={post.author.photo.url}
           />
-          <p className="ml-2 inline align-middle text-lg font-medium text-gray-700">
+          <p className=" ml-2 inline align-middle text-lg font-medium text-gray-700">
             {post.author.name}
           </p>
         </div>
         <div className="font-medium text-gray-700">
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            className="mr-2 inline h-6 w-6 text-pink-500"
+            className="mr-2 inline h-6 w-6 text-emerald-500	"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
@@ -53,12 +60,12 @@ const PostCard = ({ post }) => {
           </span>
         </div>
       </div>
-      <p className="mb-8 px-4 text-center text-lg font-normal text-gray-700 lg:px-20">
+      <p className="text-md md: text-md mb-8 text-center font-normal text-gray-700 lg:text-lg">
         {post.excerpt}
       </p>
       <div className="text-center">
         <Link href={`/post/${post.slug}`}>
-          <span className="ease inline-block transform cursor-pointer rounded-full bg-pink-600 px-8 py-3 text-lg font-medium text-white transition duration-500 hover:-translate-y-1">
+          <span className="ease inline-block transform cursor-pointer rounded-full bg-emerald-500	 px-8 py-3 text-lg font-medium text-white transition duration-500 hover:-translate-y-1 active:translate-y-1 ">
             Continue Reading
           </span>
         </Link>

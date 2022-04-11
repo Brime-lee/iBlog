@@ -2,15 +2,13 @@ import Link from 'next/link'
 
 const Header = () => {
   return (
-    <div className="container mx-auto mb-8 px-10">
-      <div className="inline-block w-full border-b border-blue-400 py-8">
-        <div className="block md:float-left">
-          <Link href="/">
-            <span className="cursor-pointer text-4xl font-bold text-white">
-              iBLOG
-            </span>
-          </Link>
-        </div>
+    <div className="container mx-auto mb-8 px-2">
+      <div className=" inline-block flex w-full justify-center  border-b border-neutral-500 py-8">
+        <Link href="/">
+          <span className="text-align: center cursor-pointer text-4xl font-bold text-neutral-700">
+            iBLOG
+          </span>
+        </Link>
       </div>
     </div>
   )

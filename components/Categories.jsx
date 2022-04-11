@@ -12,15 +12,18 @@ const Categories = () => {
     })
   }, [])
 
+  console.log('categories', categories)
   return (
-    <div className="mb-8 rounded-lg bg-white p-8 pb-12 shadow-lg">
-      <h3 className="mb-8 border-b pb-4 text-xl font-semibold">Categories</h3>
-      {categories.map((category, index) => (
+    <div className="mb-8 rounded-lg bg-emerald-50 p-8 shadow-lg">
+      <h3 className="mb-2 border-b pb-4 text-xl font-semibold text-neutral-700">
+        Categories
+      </h3>
+      {categories?.map((category, index) => (
         <Link key={index} href={`/category/${category.slug}`}>
           <span
             className={`block cursor-pointer ${
               index === categories.length - 1 ? 'border-b-0' : 'border-b'
-            } mb-3 pb-3`}
+            } pb-4`}
           >
             {category.name}
           </span>
@@ -31,3 +34,14 @@ const Categories = () => {
 }
 
 export default Categories
+
+// export async function getInitialProps() {
+//   const res = await getCategories()
+//   const json = await res.json()
+//   const categories = json
+
+//   console.log('categories', categories)
+//   return {
+//     categories: categories,
+//   }
+// }

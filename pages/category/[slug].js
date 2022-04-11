@@ -12,7 +12,7 @@ const CategoryPost = ({ posts }) => {
   }
 
   return (
-    <div className="container mx-auto mb-8 px-10">
+    <div className="container mx-auto mb-8 px-2">
       <div className="grid grid-cols-1 gap-12 lg:grid-cols-12">
         <div className="col-span-1 lg:col-span-8">
           {posts.map((post, index) => (
@@ -30,7 +30,6 @@ const CategoryPost = ({ posts }) => {
 }
 export default CategoryPost
 
-// Fetch data at build time
 export async function getStaticProps({ params }) {
   const posts = await getCategoryPost(params.slug)
 

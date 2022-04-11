@@ -1,5 +1,8 @@
 import React from 'react'
 import moment from 'moment'
+import Image from 'next/image'
+
+import { graphCMSImageLoader } from '../util'
 
 const PostDetail = ({ post }) => {
   const getContentFragment = (index, text, obj, type) => {
@@ -61,12 +64,22 @@ const PostDetail = ({ post }) => {
 
   return (
     <>
-      <div className="mb-8 rounded-lg bg-white pb-12 shadow-lg lg:p-8">
+      <div className="mb-8 rounded-lg bg-emerald-50 p-4 pb-12 shadow-lg sm:p-4 md:p-4 lg:p-8">
         <div className="relative mb-6 overflow-hidden shadow-md">
-          <img
+          {/* <img
             src={post.featuredImage.url}
             alt={post.title}
             className="h-full w-full rounded-t-lg object-cover  object-top shadow-lg lg:rounded-lg"
+          /> */}
+          <Image
+            unoptimized
+            loader={graphCMSImageLoader}
+            alt={post.title}
+            height={1200}
+            width={1500}
+            layout="intrinsic"
+            className="h-full w-full rounded-t-lg object-cover  object-top shadow-lg lg:rounded-lg"
+            src={post.featuredImage.url}
           />
         </div>
         <div className="px-4 lg:px-0">
@@ -86,7 +99,7 @@ const PostDetail = ({ post }) => {
             <div className="font-medium text-gray-700">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                className="mr-2 inline h-6 w-6 text-pink-500"
+                className="mr-2 inline h-6 w-6 text-emerald-500"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -103,7 +116,9 @@ const PostDetail = ({ post }) => {
               </span>
             </div>
           </div>
-          <h1 className="mb-8 text-3xl font-semibold">{post.title}</h1>
+          <h1 className="mb-8 text-xl font-semibold text-neutral-700 md:text-2xl lg:text-3xl">
+            {post.title}
+          </h1>
           {post.content.raw.children.map((typeObj, index) => {
             const children = typeObj.children.map((item, itemindex) =>
               getContentFragment(itemindex, item.text, item)
