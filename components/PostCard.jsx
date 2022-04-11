@@ -14,8 +14,8 @@ const PostCard = ({ post }) => {
           loader={graphCMSImageLoader}
           alt={post.title}
           height={1200}
-          width={1500}
-          layout="intrinsic"
+          width={2000}
+          layout="responsive"
           className="absolute h-80 w-full rounded-lg rounded-t-lg object-cover object-top shadow-lg"
           src={post.featuredImage.url}
         />
