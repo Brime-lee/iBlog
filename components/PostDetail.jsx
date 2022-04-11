@@ -76,8 +76,8 @@ const PostDetail = ({ post }) => {
             loader={graphCMSImageLoader}
             alt={post.title}
             height={1200}
-            width={1500}
-            layout="intrinsic"
+            width={2000}
+            layout="responsive"
             className="h-full w-full rounded-t-lg object-cover  object-top shadow-lg lg:rounded-lg"
             src={post.featuredImage.url}
           />
