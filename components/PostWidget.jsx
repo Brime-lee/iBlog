@@ -29,24 +29,26 @@ const PostWidget = ({ categories, slug }) => {
       {relatedPosts.map((post, index) => (
         <div key={index} className="mb-4 flex w-full items-center">
           <div className="w-16 flex-none transition duration-500 hover:-translate-y-0.5 active:translate-y-0.5">
-            <Link href={`/post/${post.slug}`} key={index}>
-              <Image
-                loader={graphCMSImageLoader}
-                alt=""
-                height="60px"
-                width="60px"
-                unoptimized
-                objectFit="cover"
-                className="cursor-pointer rounded-full  align-middle "
-                src={post.featuredImage.url}
-              />
+            <Link href={`/post/${post.slug}`} key={index} passHref>
+              <span>
+                <Image
+                  loader={graphCMSImageLoader}
+                  alt=""
+                  height="60px"
+                  width="60px"
+                  unoptimized
+                  objectFit="cover"
+                  className="cursor-pointer rounded-full  align-middle "
+                  src={post.featuredImage.url}
+                />
+              </span>
             </Link>
           </div>
           <div className="ml-4 flex-grow">
             <p className="font-xs text-gray-500">
               {moment(post.createdAt).format('MMM DD, YYYY')}
             </p>
-            <Link href={`/post/${post.slug}`} key={index}>
+            <Link href={`/post/${post.slug}`} key={index} passHref>
               <p className="cursor-pointer text-xs transition duration-500 hover:-translate-y-0.5 ">
                 {post.title}
               </p>

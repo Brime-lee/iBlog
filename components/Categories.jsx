@@ -3,7 +3,7 @@ import Link from 'next/link'
 
 import { getCategories } from '../services'
 
-const Categories = () => {
+export default function Categories() {
   const [categories, setCategories] = useState([])
 
   useEffect(() => {
@@ -12,16 +12,15 @@ const Categories = () => {
     })
   }, [])
 
-  console.log('categories', categories)
   return (
     <div className="mb-8 rounded-lg bg-emerald-50 p-8 shadow-lg">
       <h3 className="mb-2 border-b pb-4 text-xl font-semibold text-neutral-700">
         Categories
       </h3>
       {categories?.map((category, index) => (
-        <Link key={index} href={`/category/${category.slug}`}>
+        <Link key={index} href={`/category/${category.slug}`} passHref>
           <span
-            className={`block cursor-pointer ${
+            className={`active:translate-y-0.1 block cursor-pointer transition duration-500 hover:-translate-y-0.5 ${
               index === categories.length - 1 ? 'border-b-0' : 'border-b'
             } pb-4`}
           >
@@ -33,14 +32,11 @@ const Categories = () => {
   )
 }
 
-export default Categories
-
-// export async function getInitialProps() {
+// Categories.getInitialProps = async () => {
 //   const res = await getCategories()
-//   const json = await res.json()
-//   const categories = json
+//   console.log('res', res)
+//   const { categories } = await res.json()
 
-//   console.log('categories', categories)
 //   return {
 //     categories: categories,
 //   }
