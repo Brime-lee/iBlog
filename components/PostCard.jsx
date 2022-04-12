@@ -20,7 +20,7 @@ const PostCard = ({ post }) => {
           src={post.featuredImage.url}
         />
       </div>
-      <Link href={`/post/${post.slug}`}>
+      <Link href={`/post/${post.slug}`} passHref>
         <h1 className="mb-8 cursor-pointer text-center text-xl font-semibold text-neutral-700 transition duration-700 hover:text-emerald-500 md:text-2xl lg:text-3xl">
           {post.title}
         </h1>
@@ -64,7 +64,7 @@ const PostCard = ({ post }) => {
         {post.excerpt}
       </p>
       <div className="text-center">
-        <Link href={`/post/${post.slug}`}>
+        <Link href={`/post/${post.slug}`} passHref>
           <span className="ease inline-block transform cursor-pointer rounded-full bg-emerald-500	 px-8 py-3 text-lg font-medium text-white transition duration-500 hover:-translate-y-1 active:translate-y-1 ">
             Continue Reading
           </span>
