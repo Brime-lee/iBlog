@@ -3,7 +3,12 @@ import moment from 'moment'
 import Link from 'next/link'
 import Image from 'next/image'
 
-import { graphCMSImageLoader } from '../util'
+import { graphCMSImageLoader, shimmer } from '../util'
+
+const toBase64 = (str) =>
+  typeof window === 'undefined'
+    ? Buffer.from(str).toString('base64')
+    : window.btoa(str)
 
 const PostCard = ({ post }) => {
   return (
@@ -15,6 +20,10 @@ const PostCard = ({ post }) => {
           alt={post.title}
           height={1200}
           width={2000}
+          placeholder="blur"
+          blurDataURL={`data:image/svg+xml;base64,${toBase64(
+            shimmer(700, 475)
+          )}`}
           layout="responsive"
           className="absolute h-80 w-full rounded-lg rounded-t-lg object-cover object-top shadow-lg"
           src={post.featuredImage.url}

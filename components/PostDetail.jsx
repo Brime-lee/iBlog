@@ -2,7 +2,7 @@ import React from 'react'
 import moment from 'moment'
 import Image from 'next/image'
 
-import { graphCMSImageLoader } from '../util'
+import { graphCMSImageLoader, shimmer } from '../util'
 
 const PostDetail = ({ post }) => {
   const getContentFragment = (index, text, obj, type) => {
@@ -49,7 +49,7 @@ const PostDetail = ({ post }) => {
         )
       case 'image':
         return (
-          <img
+          <Image
             key={index}
             alt={obj.title}
             height={obj.height}
@@ -62,21 +62,25 @@ const PostDetail = ({ post }) => {
     }
   }
 
+  const toBase64 = (str) =>
+    typeof window === 'undefined'
+      ? Buffer.from(str).toString('base64')
+      : window.btoa(str)
+
   return (
     <>
       <div className="mb-8 rounded-lg bg-emerald-50 p-4 pb-12 shadow-lg sm:p-4 md:p-4 lg:p-8">
         <div className="relative mb-6 overflow-hidden shadow-md">
-          {/* <img
-            src={post.featuredImage.url}
-            alt={post.title}
-            className="h-full w-full rounded-t-lg object-cover  object-top shadow-lg lg:rounded-lg"
-          /> */}
           <Image
             unoptimized
             loader={graphCMSImageLoader}
             alt={post.title}
             height={1200}
             width={2000}
+            placeholder="blur  "
+            blurDataURL={`data:image/svg+xml;base64,${toBase64(
+              shimmer(700, 475)
+            )}`}
             layout="responsive"
             className="h-full w-full rounded-t-lg object-cover  object-top shadow-lg lg:rounded-lg"
             src={post.featuredImage.url}
@@ -85,10 +89,11 @@ const PostDetail = ({ post }) => {
         <div className="px-4 lg:px-0">
           <div className="mb-8 flex w-full items-center">
             <div className="mr-8 hidden items-center items-center justify-center md:flex lg:mb-0 lg:w-auto">
-              <img
+              <Image
                 alt={post.author.name}
-                height="30px"
-                width="30px"
+                loader={graphCMSImageLoader}
+                height={30}
+                width={30}
                 className="rounded-full align-middle"
                 src={post.author.photo.url}
               />
@@ -119,6 +124,7 @@ const PostDetail = ({ post }) => {
           <h1 className="mb-8 text-xl font-semibold text-neutral-700 md:text-2xl lg:text-3xl">
             {post.title}
           </h1>
+
           {post.content.raw.children.map((typeObj, index) => {
             const children = typeObj.children.map((item, itemindex) =>
               getContentFragment(itemindex, item.text, item)
