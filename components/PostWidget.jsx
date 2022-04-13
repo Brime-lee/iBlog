@@ -4,9 +4,9 @@ import moment from 'moment'
 import Link from 'next/link'
 
 import { graphCMSImageLoader } from '../util'
-import { getSimilarPosts, getRecentPosts } from '../services'
+import { getSimilarPosts } from '../services'
 
-const PostWidget = ({ categories, slug }) => {
+const PostWidget = ({ categories, slug, recentPosts }) => {
   const [relatedPosts, setRelatedPosts] = useState([])
 
   useEffect(() => {
@@ -15,9 +15,7 @@ const PostWidget = ({ categories, slug }) => {
         setRelatedPosts(result)
       })
     } else {
-      getRecentPosts().then((result) => {
-        setRelatedPosts(result)
-      })
+      setRelatedPosts(recentPosts)
     }
   }, [slug])
 
@@ -26,7 +24,7 @@ const PostWidget = ({ categories, slug }) => {
       <h3 className="mb-2 border-b pb-4 text-xl font-semibold text-neutral-700">
         {slug ? 'Related Posts' : 'Recent Posts'}
       </h3>
-      {relatedPosts.map((post, index) => (
+      {relatedPosts?.map((post, index) => (
         <div key={index} className="mb-4 flex w-full items-center">
           <div className="w-16 flex-none transition duration-500 hover:-translate-y-0.5 active:translate-y-0.5">
             <Link href={`/post/${post.slug}`} key={index} passHref>

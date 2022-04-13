@@ -1,21 +1,11 @@
 import React from 'react'
 import { useRouter } from 'next/router'
 
-import {
-  PostDetail,
-  Categories,
-  PostWidget,
-  Author,
-  Loader,
-} from '../../components'
-import { getPosts, getPostDetails } from '../../services'
+import { PostDetail, Categories, PostWidget, Author } from '../../components'
+import { getCategories, getPostDetails } from '../../services'
 
-const PostDetails = ({ post }) => {
+const PostDetails = ({ post, categories }) => {
   const router = useRouter()
-
-  if (router.isFallback) {
-    return <Loader />
-  }
 
   return (
     <>
@@ -31,7 +21,7 @@ const PostDetails = ({ post }) => {
                 slug={post.slug}
                 categories={post.categories.map((category) => category.slug)}
               />
-              <Categories />
+              <Categories categories={categories} />
             </div>
           </div>
         </div>
@@ -40,21 +30,15 @@ const PostDetails = ({ post }) => {
   )
 }
 
-export async function getStaticProps({ params }) {
-  const data = await getPostDetails(params.slug)
-  return {
+export async function getServerSideProps({ params, query }) {
+  const categories = await getCategories()
+
+  return getPostDetails(params.slug).then((data) => ({
     props: {
       post: data,
+      categories,
     },
-  }
-}
-
-export async function getStaticPaths() {
-  const posts = await getPosts()
-  return {
-    paths: posts.map(({ node: { slug } }) => ({ params: { slug } })),
-    fallback: true,
-  }
+  }))
 }
 
 export default PostDetails

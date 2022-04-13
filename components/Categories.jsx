@@ -1,17 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import Link from 'next/link'
 
-import { getCategories } from '../services'
-
-export default function Categories() {
-  const [categories, setCategories] = useState([])
-
-  useEffect(() => {
-    getCategories().then((newCategories) => {
-      setCategories(newCategories)
-    })
-  }, [])
-
+export default function Categories({ categories }) {
   return (
     <div className="mb-8 rounded-lg bg-emerald-50 p-8 shadow-lg">
       <h3 className="mb-2 border-b pb-4 text-xl font-semibold text-neutral-700">
@@ -31,13 +21,3 @@ export default function Categories() {
     </div>
   )
 }
-
-// Categories.getInitialProps = async () => {
-//   const res = await getCategories()
-//   console.log('res', res)
-//   const { categories } = await res.json()
-
-//   return {
-//     categories: categories,
-//   }
-// }
