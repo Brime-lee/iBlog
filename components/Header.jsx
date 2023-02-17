@@ -6,7 +6,7 @@ const Header = () => {
       <div className=" inline-block flex w-full justify-center  border-b border-neutral-500 py-8">
         <Link href="/" passHref>
           <span className="text-align: center cursor-pointer text-4xl font-bold text-neutral-700">
-            iBLOG
+            i-BLOG
           </span>
         </Link>
       </div>
